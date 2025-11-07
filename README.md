@@ -24,9 +24,9 @@ Payload (.payload.sh) : [XDA Forums : [SYSTEM USER] Fire Cube/Stick/TV/Tablet â‰
 
 ##### To Install, either grab it straight from the Releases page
 
-- [Windows amd64](https://github.com/lightyyt/f78tool/releases/download/windows.zip)
+- [Windows amd64](https://github.com/lightyyt/F78Tool/releases/latest/download/f78tool_windows.zip)
 
-- [Linux amd64](https://github.com/lightyyt/f78tool/releases/download/linux.zip)
+- [Linux amd64](https://github.com/lightyyt/F78Tool/releases/latest/download/f78tool_linux.tar)
 
 ##### Or download the source code, then
 
