@@ -1,0 +1,4 @@
+adb-shell==0.4.4
+adb-shell[usb]==0.4.4
+customtkinter==5.2.2
+CTkMessageBox==2.7

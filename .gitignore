@@ -1,0 +1,33 @@
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# Python Virtual Environment
+.venv/
+
+# RSA Keys (private and pub)
+RSA_KEY*
+
+# Temporary Files
+*.swp
+*.swo
+*.DS_STORE
+*.log
+*.Temporary
+
+# IDE
+.vscode/
+.idea/
+
+# Compiled Python Files
+*.pyc
+
+# Build Output
+build/
+
+# File Tree Check Script
+file_tree.py
+
+# PyInstaller
+dist/
+main.spec

