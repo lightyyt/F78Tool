@@ -2,6 +2,7 @@ import customtkinter as ctk
 from tools import sh_payload
 from CTkMessagebox import CTkMessagebox as MsgBox
 import tools
+import apk_tools
 
 class AdbMainWindow(ctk.CTk):
     def on_closing(self):
@@ -46,9 +47,17 @@ class AdbMainWindow(ctk.CTk):
         self.e_grid(self.apps_frame)
         
         self.debloat_frame = ctk.CTkScrollableFrame(self)
-        
+        self.debloat_frame.columnconfigure((0,1), weight=1)
+
         self.install_frame = ctk.CTkScrollableFrame(self)
-        
+        self.install_frame.columnconfigure(0, weight=1)
+
+        ### INSTALL FRAME
+        y = 0
+        for pack in apk_tools.packs:
+            btn=ctk.CTkButton(self.install_frame, text="Install: "+pack, command=lambda s=pack: self._install(s))
+            btn.grid(row=y, column=0,padx=5,pady=5,sticky="news")
+            y+=1
 
         ### APPS FRAME
         self.make_package_list()
@@ -74,6 +83,9 @@ class AdbMainWindow(ctk.CTk):
                           
         btn.grid(row=y,column=1,padx=5,pady=5,sticky="news")
     
+    def _install(self, pack):
+        apk_tools.install_pack(self.dev, pack)
+
     def _debloat(self, l):
         if l == "Extreme":
             msg = MsgBox(title="Debloat",message="This could potentially break things!\nContinue?",option_1="Yes",option_2="No",icon="warning")
@@ -83,7 +95,10 @@ class AdbMainWindow(ctk.CTk):
         #MsgBox(title="Debloat", message="Debloating...")
         for pkg in tools.debloat_lists[l]:
             print(tools.sh_payload(self.dev, "pm disable-user "+pkg))
-        MsgBox(title="Debloat", message="Debloat Finished!")
+        if l == "Remove OTA":
+            MsgBox(title="OTA", message="OTA Disabled!")
+        else:
+            MsgBox(title="Debloat", message="Debloat Finished!")
         
     def _rebloat(self, l):
         msg = MsgBox(title="Rebloat",message="Are you sure you want to continue?",option_1="Yes",option_2="No",icon="question")
@@ -93,7 +108,10 @@ class AdbMainWindow(ctk.CTk):
         #MsgBox(title="Debloat", message="Debloating...")
         for pkg in tools.debloat_lists[l]:
             print(tools.sh_payload(self.dev, "pm enable "+pkg))
-        MsgBox(title="Rebloat", message="Re-bloat Finished!")
+        if l == "Remove OTA":
+            MsgBox(title="OTA", message="OTA Disabled!")
+        else:
+            MsgBox(title="Rebloat", message="Re-bloat Finished!")
     
     def e_grid(self, e): e.grid(row=1,column=0,columnspan=3,padx=20,pady=20,sticky="news")
     

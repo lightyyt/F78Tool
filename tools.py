@@ -18,7 +18,7 @@ from CTkMessagebox import CTkMessagebox as MsgBox
 import customtkinter as ctk
 import config
 import time, os
-from sys import exit
+from sys import exit, argv
 
 #####################
 # KEY LOAD FUNCTION #
@@ -86,11 +86,12 @@ def upload_payload(dev):
     tries = 0
     while v.strip()!="1":
         if tries > 0:
-            print(f"Failed. Retrying ({tries}/10)...")
-        if tries > 10:
+            print(f"Failed. Retrying ({tries}/5)...")
+        if tries >= 5:
             print("Failure!")
             print("Please go into your terminal and run: ")
             print("adb shell /data/local/tmp/payload.sh && adb kill-server")
+            print(f"Or reboot your device with: {argv[0]} reboot")
             exit(1)
             break
         print("Uploading...")
@@ -125,6 +126,9 @@ debloat_lists = {
     "Extreme":["com.amazon.dee.app","amazon.speech.sim","com.amazon.alexa.multimodal.gemini","com.amazon.comms.kids","com.amazon.weather","com.amazon.csapp","com.ivona.tts.oem",
                "com.kingsoft.office.amz","com.amazon.kindle.unifiedSearch","com.amazon.afe.app","com.amazon.cloud9","com.amazon.windowshop","com.android.quicksearchbox","com.amazon.avod","com.amazon.kindle","com.amazon.webapp","com.amazon.cloud9.kids","com.amazon.imdb.tv.mobile.app","com.amazon.redstone","com.audible.application.kindle","com.amazon.venezia","com.amazon.photos","com.amazon.mp3","com.amazon.tahoe","com.amazon.ags.app","com.amazon.hedwig",
             "com.amazon.weather","com.android.bookmarkprovider","com.android.calendar","com.android.camera2","com.android.deskclock","com.android.contacts","com.android.providers.downloads.ui","com.android.email","com.android.gallery3d","com.android.protips","com.android.music"],
+    "Remove OTA":[
+        "com.amazon.kindle.otter.oobe.forced.ota", "com.amazon.device.software.ota", "com.amazon.device.software.ota.override"
+    ],
 }
 
 #####################
